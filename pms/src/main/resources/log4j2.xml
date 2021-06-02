@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+	<Properties>
+		<Property name="LOG_FORMAT">%d{yyyy-MM-dd HH:mm:ss} %p %m%n</Property>
+		<Property name="BASE_DIR">D:\cksrn\PmsPrj\Log</Property>
+	</Properties>
+
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT" follow="true">
+			<PatternLayout pattern="${LOG_FORMAT}"></PatternLayout>
+		</Console>
+		<RollingFile name="File" filename="${BASE_DIR}/LogFile.log" filePattern="${BASSE_DIR}/LogFile.%d{yyyyMMdd}.log">
+			<PatternLayout pattern="${LOG_FORMAT}"></PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy/>
+			</Policies>
+			<DefaultRolloverStrategy>
+				<Delete basePath="${BASE_DIR}">
+					<IfFileName glob="*.log"/>
+					<!-- <IfFileName age="30d"/> -->
+				</Delete>
+			</DefaultRolloverStrategy>
+		</RollingFile>
+	</Appenders>
+	
+	<Loggers>
+		<Root level="info">
+			<AppenderRef ref="Console"/>
+			<AppenderRef ref="File"/>
+		</Root>	
+	</Loggers>
+	
+</Configuration>
